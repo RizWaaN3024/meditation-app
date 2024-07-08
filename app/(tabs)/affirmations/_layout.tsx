@@ -1,12 +1,13 @@
 import { View, Text } from "react-native";
 import React from "react";
+import { Stack } from "expo-router";
 
-const Layout = () => {
+const AffirmationsLayout = () => {
   return (
-    <View>
-      <Text>Layout</Text>
-    </View>
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+    </Stack>
   );
 };
 
-export default Layout;
+export default AffirmationsLayout;
