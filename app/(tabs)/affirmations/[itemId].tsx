@@ -28,6 +28,8 @@ const AffirmationPractice = () => {
       if (affirmationToStart) {
         setAffirmation(affirmationToStart);
 
+        const affirmationArray = affirmationToStart.text.split(".");
+
         return;
       }
     }
