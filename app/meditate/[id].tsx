@@ -8,12 +8,18 @@ import { AntDesign } from "@expo/vector-icons";
 const Meditate = () => {
   return (
     <View className="flex-1">
-      <ImageBackground source={MEDITATION_IMAGES[0]} resizeMode="cover" className="flex-1">
+      <ImageBackground
+        source={MEDITATION_IMAGES[0]}
+        resizeMode="cover"
+        className="flex-1"
+      >
         <AppGradient colors={["transparent", "rgba(0, 0, 0, 0.8)"]}>
-            <Pressable onPress={() => router.back()} className="absolute top-16 left-6 z-10">
-            <AntDesign name="leftcircle" size={50} color="white" />
-            </Pressable>
-        <Text>Meditate</Text>
+          <Pressable
+            onPress={() => router.back()}
+            className="absolute top-16 left-6 z-10"
+          >
+            <AntDesign name="leftcircleo" size={50} color="white" />
+          </Pressable>
         </AppGradient>
       </ImageBackground>
     </View>
