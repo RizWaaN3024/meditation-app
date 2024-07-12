@@ -16,6 +16,7 @@ const AffirmationPractice = () => {
   const { itemId } = useLocalSearchParams();
 
   const [affirmation, setAffirmation] = useState<GalleryPreviewData>();
+  const [sentences, setSentences] = useState<string[]>();
 
   useEffect(() => {
     for (let idx = 0; idx < AFFIRMATION_GALLERY.length; idx++) {
@@ -30,6 +31,10 @@ const AffirmationPractice = () => {
 
         const affirmationArray = affirmationToStart.text.split(".");
 
+        if (affirmationArray[affirmationArray.length - 1] === '') {
+          affirmationArray.pop();
+        }
+        setSentences(affirmationArray)
         return;
       }
     }
