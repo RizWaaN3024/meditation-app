@@ -16,7 +16,7 @@ const AffirmationPractice = () => {
   const { itemId } = useLocalSearchParams();
 
   const [affirmation, setAffirmation] = useState<GalleryPreviewData>();
-  const [sentences, setSentences] = useState<string[]>();
+  const [sentences, setSentences] = useState<string[]>([]);
 
   useEffect(() => {
     for (let idx = 0; idx < AFFIRMATION_GALLERY.length; idx++) {
@@ -56,9 +56,12 @@ const AffirmationPractice = () => {
           <ScrollView className="mt-20" showsVerticalScrollIndicator={false}>
             <View className="h-full justify-center">
               <View className="h-4/5 justify-center">
-                <Text className="text-white text-3xl mb-12 font-bold text-center">
-                  {affirmation?.text}
+                {sentences?.map((sentence, idx) => (
+
+                <Text key={idx} className="text-white text-3xl mb-12 font-bold text-center">
+                  {sentence}.
                 </Text>
+                ))}
               </View>
             </View>
           </ScrollView>
