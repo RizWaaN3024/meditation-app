@@ -17,16 +17,19 @@ const Meditate = () => {
 
     // Exit 
     if(secondsRemaining === 0) {
+      setIsMeditating(false);
       return;
-    } else {
-      timerId = setTimeout(() => {
-        setSecondsRemaining(secondsRemaining - 1);
-      }, 1000);
-    }
+    } 
+      if (isMeditating) {
+        timerId = setTimeout(() => {
+          setSecondsRemaining(secondsRemaining - 1);
+        }, 1000);
+      }
+
     return () => {
       clearTimeout(timerId)
     }
-  }, [secondsRemaining])
+  }, [secondsRemaining, isMeditating])
   return (
     <View className="flex-1">
       <ImageBackground
@@ -48,7 +51,7 @@ const Meditate = () => {
             </View>
           </View>
           <View className="mb-5">
-            <CustomButton title="Start Meditation" onPress={() => console.log("Hello")} />
+            <CustomButton title="Start Meditation" onPress={() => setIsMeditating(true)} />
           </View>
         </AppGradient>
       </ImageBackground>
