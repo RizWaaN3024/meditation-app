@@ -50,7 +50,7 @@ const Meditate = () => {
 
           <View className="flex-1 justify-center">
             <View className="mx-auto bg-neutral-200 rounded-full w-44 h-44 justify-center items-center">
-              <Text className="text-4xl text-blue-800 font-rmono">{formattedTimeMinutes}.{formattedTimeSeconds}</Text>
+              <Text className="text-4xl text-blue-800 font-rmono">{formattedTimeMinutes}:{formattedTimeSeconds}</Text>
             </View>
           </View>
           <View className="mb-5">
