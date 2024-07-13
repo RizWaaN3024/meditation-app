@@ -5,12 +5,15 @@ import AppGradient from "@/components/AppGradient";
 import { router, useLocalSearchParams } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 import CustomButton from "@/components/CustomButton";
+import { Audio } from "expo-av";
+import { MEDITATION_DATA, AUDIO_FILES } from "@/constants/meditationData";
 
 const Meditate = () => {
   const { id } = useLocalSearchParams();
 
   const [secondsRemaining, setSecondsRemaining] = useState<number>(20);
   const [isMeditating, setIsMeditating] = useState(false);
+  const [audioSound, setAudioSound] = useState<Audio.Sound>(); 
 
   useEffect(() => {
     let timerId: NodeJS.Timeout;
@@ -30,6 +33,17 @@ const Meditate = () => {
       clearTimeout(timerId)
     }
   }, [secondsRemaining, isMeditating])
+
+  const toggleMeditationSessionStatus = async () => {
+    if (secondsRemaining === 0) {
+      setSecondsRemaining(20);
+    }
+    setIsMeditating(!isMeditating)
+  }
+
+  const initializeSound = async () => {
+    const audioFileName = MEDITATION_DATA[Number(id) - 1].audio;
+  }
 
   const formattedTimeMinutes = String(Math.floor(secondsRemaining / 60)).padStart(2, "0");
   const formattedTimeSeconds = String(secondsRemaining % 60).padStart(2, "0");
