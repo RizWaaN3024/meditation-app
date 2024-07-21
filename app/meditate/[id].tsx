@@ -14,6 +14,7 @@ const Meditate = () => {
   const [secondsRemaining, setSecondsRemaining] = useState<number>(20);
   const [isMeditating, setIsMeditating] = useState(false);
   const [audioSound, setAudioSound] = useState<Audio.Sound>(); 
+  const [isPlayingAudio, setPlayingAudio] = useState(false);
 
   useEffect(() => {
     let timerId: NodeJS.Timeout;
@@ -39,10 +40,32 @@ const Meditate = () => {
       setSecondsRemaining(20);
     }
     setIsMeditating(!isMeditating)
+    await togglePlayPause();
+  }
+
+  const togglePlayPause = async () => {
+    const sound = audioSound ? audioSound : await initializeSound();
+
+    const status = await sound?.getStatusAsync();
+
+    if (status?.isLoaded && !isPlayingAudio) {
+      await sound.playAsync();
+      setPlayingAudio(true);
+    } else {
+      await sound.pauseAsync();
+      setPlayingAudio(false);
+    }
   }
 
   const initializeSound = async () => {
     const audioFileName = MEDITATION_DATA[Number(id) - 1].audio;
+
+    const { sound } = await Audio.Sound.createAsync(
+      AUDIO_FILES[audioFileName]
+    )
+
+    setAudioSound(sound)
+    return sound
   }
 
   const formattedTimeMinutes = String(Math.floor(secondsRemaining / 60)).padStart(2, "0");
@@ -68,7 +91,7 @@ const Meditate = () => {
             </View>
           </View>
           <View className="mb-5">
-            <CustomButton title="Start Meditation" onPress={() => setIsMeditating(true)} />
+            <CustomButton title="Start Meditation" onPress={toggleMeditationSessionStatus} />
           </View>
         </AppGradient>
       </ImageBackground>
